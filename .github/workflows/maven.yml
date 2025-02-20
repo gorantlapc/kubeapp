@@ -35,6 +35,9 @@ jobs:
         restore-keys: ${{ runner.os }}-maven
         
     - name: Build with Maven
+      env:
+          JIB_USERNAME: ${{ secrets.JIB_USERNAME }}
+          JIB_PASSWORD: ${{ secrets.JIB_PASSWORD }}
       run: | 
         mvn compile jib:build \
           -Djib.to.auth.username=${{ secrets.JIB_USERNAME }} \
