@@ -56,7 +56,7 @@
 						<image>eclipse-temurin:17-jre</image>
 					</from>
 					<to>
-						<image>docker.io/pcgorantla/kubeapp:jib</image>
+						<image>docker.io/pcgorantla/kubeapp2:jib</image>
 							<auth>
 								<!--suppress UnresolvedMavenProperty -->
 								<username>${env.JIB_USERNAME}</username>
