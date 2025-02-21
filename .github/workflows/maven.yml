@@ -16,7 +16,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     environment: dev
 
@@ -27,20 +26,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-
-    - name: Debug GitHub Secrets (Do NOT Print Passwords)
-      run: |
-          echo "DOCKER_USERNAME is set as: ${{ secrets.JIB_USERNAME }}"
-          echo "Checking Docker Hub authentication..."
-
-    - name: Test Docker Login
-      run: |
-          echo "${{ secrets.JIB_PASSWORD }}" | docker login -u "${{ secrets.JIB_USERNAME }}" --password-stdin
         
     - name: Build with Maven
-      env:
-          JIB_USERNAME: ${{ secrets.JIB_USERNAME }}
-          JIB_PASSWORD: ${{ secrets.JIB_PASSWORD }}
       run: | 
         mvn compile jib:build \
           -Djib.to.auth.username=${{ secrets.JIB_USERNAME }} \
