@@ -27,12 +27,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Set up Maven cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-maven
+    - name: Debug GitHub Secrets (Do NOT Print Passwords)
+      run: |
+          echo "DOCKER_USERNAME is set as: ${{ secrets.JIB_USERNAME }}"
+          echo "Checking Docker Hub authentication..."
+
+    - name: Test Docker Login
+      run: |
+          echo "${{ secrets.JIB_PASSWORD }}" | docker login -u "${{ secrets.JIB_USERNAME }}" --password-stdin
         
     - name: Build with Maven
       env:
